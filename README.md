@@ -5,7 +5,7 @@ To view commands use &help
 
 Bot is created for fun
 
-Language of commands: Russian
+Bot language: Russian
 
 <h2>Features</h2>
 
