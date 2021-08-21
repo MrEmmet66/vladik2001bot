@@ -1,7 +1,5 @@
 import discord
 from discord.ext import commands
-import time
-
 
 class AvatarCog(commands.Cog, name="get avatar command"):
 	def __init__(self, bot:commands.bot):
