@@ -62,42 +62,6 @@ async def calculate(ctx, *, nums: str):
 		else: 
 			await ctx.send("Результат: %s = %s" % (math_expression, result))
 
-@bot.command(pass_context = True)
-async def weather(ctx, city: str):
-	place = city
-	config_dict = get_default_config()
-	config_dict['language'] = 'ru'
-	owm = pyowm.OWM("f46cd7668657e50c31b41887016f3b65")
-	weather_mgr = owm.weather_manager()
-	try:
-		observation = weather_mgr.weather_at_place(place)
-	except: await ctx.send("Город не найден")
-	else:
-		weather = observation.weather
-	weather.status          
-	weather.detailed_status
-	midtemp =  weather.temperature("celsius")["temp_min"]
-	tempFeelsLike = weather.temperature("celsius")["feels_like"]
-	speedwind = observation.weather.wind()["speed"]
-	degWind = observation.weather.wind()["deg"]
-	now = datetime.now()
-	dt_string = now.strftime("%d/%m/%Y %H:%M:%S")
-	embed=discord.Embed(title=f"Погода для города {city}", color=0x2fcdcd)
-	embed.add_field(name="Общее состояние:", value=f"{weather.detailed_status}", inline=False)
-	embed.add_field(name="Температура:", value=f"{str(midtemp)}°C, ощущается как {tempFeelsLike}°C", inline=False)
-	embed.add_field(name="Скорость ветра", value=f"{speedwind} м/с, угол наклона {degWind}°", inline=False)
-	embed.set_author(name="Weather", icon_url="https://image.flaticon.com/icons/png/512/252/252035.png")
-	embed.set_footer(text=f"Текущее время: {dt_string}")
-	await ctx.send(embed=embed)
-
-@weather.error
-async def weather_error(ctx, error):
-	if isinstance(error, commands.MissingRequiredArgument):
-		errorEmbed = discord.Embed(title="Ошибка", color=0xf70002)
-		errorEmbed.add_field(name="Пожалуйста, укажите город", value="Пример использования: {}weather Москва".format(prefix))
-		await ctx.send(embed=errorEmbed)
-
-
 @calculate.error
 async def calculate_error(ctx, error):
 	if isinstance(error, commands.MissingRequiredArgument):
@@ -106,4 +70,3 @@ async def calculate_error(ctx, error):
 		await ctx.send(embed=errorEmbed)
 
 bot.run(token)
-	
