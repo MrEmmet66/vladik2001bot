@@ -5,7 +5,7 @@ class AvatarCog(commands.Cog, name="get avatar command"):
 	def __init__(self, bot:commands.bot):
 		self.bot = bot
         
-	@commands.command(name = "avatar", description = "Get user avatar")
+	@commands.command(name = "avatar", description = "Get user avatar", aliases=["a", "ava"])
 	async def avatar(self, ctx, member: discord.Member = None):
             if member is None:
                 member = ctx.author

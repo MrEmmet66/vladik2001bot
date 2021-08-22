@@ -16,7 +16,7 @@ class WeatherCog(commands.Cog, name="weather"):
 	def __init__(self, bot:commands.bot):
 		self.bot = bot
 
-	@commands.command(name= "weather", description= "Get user avatar")
+	@commands.command(name= "weather", description= "Getting weather info", aliases=["w"])
 	async def weather(self, ctx, city:str):
 			config_dict = get_default_config()
 			config_dict['language'] = 'ru'
